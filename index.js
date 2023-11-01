@@ -36,6 +36,13 @@ app.post("/insertWords", async (req, res) => {
     res.status(500).json({ error: "An error occurred while inserting words" });
   }
 });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.get("/fetchData", async (req, res) => {
   try {
     const users = await Word.find();
